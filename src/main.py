@@ -1,10 +1,12 @@
 import argparse
 from pathlib import Path
 from typing import Dict, Any
+import subprocess
 
 from rayleigh_solver import RayleighFlowSolver
 from plots import FlowVisualizer
 from utils import SimulationConfig, ResultsExporter
+from gmsh_exporter import write_gmsh_2d
 
 class AfterburnerSimulation:
     def __init__(self, config: Dict[str, Any]):
@@ -26,6 +28,17 @@ class AfterburnerSimulation:
         # Export results if requested
         if self.config.export_results:
             self.exporter.export_to_csv(results, self.config.output_path)
+        
+        # Export Gmsh visualization
+        write_gmsh_2d(results, 'results.msh', height=2.0, ny=30)
+        
+        # Launch Gmsh to visualize the results
+        try:
+            subprocess.run(['gmsh', 'results.msh'], check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Error launching Gmsh: {e}")
+        except FileNotFoundError:
+            print("Gmsh not found. Please open results.msh manually in Gmsh.")
         
         print("Simulation completed successfully!")
 
