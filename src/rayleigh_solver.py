@@ -3,14 +3,14 @@ from scipy.integrate import solve_ivp
 from typing import Dict, Any, Tuple
 
 class RayleighFlowSolver:
-    def __init__(self, config: Dict[str, Any]):
+    def __init__(self, config):
         """Initialize the Rayleigh flow solver with configuration parameters."""
         self.config = config
         self.gamma = 1.4  # Specific heat ratio for air
         self.R = 287.0    # Gas constant for air (J/kg·K)
         
         # Initialize grid
-        self.x = np.linspace(0, config['length'], config['points'])
+        self.x = np.linspace(0, config.length, config.points)
         self.dx = self.x[1] - self.x[0]
         
         # Initialize flow properties
@@ -25,16 +25,16 @@ class RayleighFlowSolver:
     
     def _set_inlet_conditions(self):
         """Set the inlet conditions for the flow."""
-        self.mach[0] = self.config['mach']
-        self.pressure[0] = self.config['pressure']
-        self.temperature[0] = self.config['temperature']
+        self.mach[0] = self.config.mach
+        self.pressure[0] = self.config.pressure
+        self.temperature[0] = self.config.temperature
         self.density[0] = self.pressure[0] / (self.R * self.temperature[0])
         self.velocity[0] = self.mach[0] * np.sqrt(self.gamma * self.R * self.temperature[0])
     
     def _heat_addition_profile(self, x: float) -> float:
         """Calculate the heat addition profile using a Gaussian distribution."""
-        x_peak = self.config['length'] / 2
-        return self.config['heat_peak'] * np.exp(-(x - x_peak)**2 / (2 * self.config['heat_width']**2))
+        x_peak = self.config.length / 2
+        return self.config.heat_peak * np.exp(-(x - x_peak)**2 / (2 * self.config.heat_width**2))
     
     def _flow_equations(self, x: float, y: np.ndarray) -> np.ndarray:
         """Define the system of ODEs for Rayleigh flow with heat addition."""
@@ -58,7 +58,7 @@ class RayleighFlowSolver:
         # Solve ODE system
         solution = solve_ivp(
             self._flow_equations,
-            (0, self.config['length']),
+            (0, self.config.length),
             y0,
             method='RK45',
             t_eval=self.x,
