@@ -1,0 +1,48 @@
+Textbook Case Validation Summary
+==================================================
+
+Case: LaminarPoiseuilleFlow
+------------------------------
+
+Variable: u
+mae: 0.0630
+rmse: 0.0704
+r2: 0.7859
+max_error: 0.1000
+mean_error: -0.0000
+std_error: 0.0704
+relative_error: inf
+confidence_interval: -0.0140 to 0.0140
+
+Variable: p
+mae: 0.0320
+rmse: 0.0355
+r2: 0.9963
+max_error: 0.0500
+mean_error: 0.0005
+std_error: 0.0355
+relative_error: 23.6513
+confidence_interval: -0.0066 to 0.0076
+
+Case: BlasiusBoundaryLayer
+------------------------------
+
+Variable: u
+mae: 0.1179
+rmse: 0.1354
+r2: 0.3348
+max_error: 0.2718
+mean_error: 0.1179
+std_error: 0.0666
+relative_error: inf
+confidence_interval: 0.1046 to 0.1312
+
+Variable: v
+mae: 0.0589
+rmse: 0.0677
+r2: -inf
+max_error: 0.1359
+mean_error: 0.0589
+std_error: 0.0333
+relative_error: inf
+confidence_interval: 0.0523 to 0.0656
