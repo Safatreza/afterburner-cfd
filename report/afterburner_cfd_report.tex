@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\title{A Modular 2D Compressible Navier-Stokes Solver for Afterburner CFD Analysis}
+\author{Your Name}
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+This report presents a modular Python-based solver for 2D compressible Navier-Stokes equations, supporting supersonic flows, heat addition, turbulence, and combustion, with a focus on afterburner CFD analysis.
+\end{abstract}
+\section{Introduction}
+Motivation, background, and objectives of the solver.
+\section{Solver Methodology}
+\subsection{Governing Equations}
+Compressible Navier-Stokes, energy, turbulence, and combustion models.
+\subsection{Numerical Methods}
+Finite volume, MUSCL, slope limiters, time integration.
+\subsection{Modular Architecture}
+Mesh, boundary conditions, plugins, post-processing.
+\section{Validation}
+\subsection{Test Cases}
+Textbook and experimental cases.
+\subsection{Uncertainty Quantification}
+Monte Carlo, error metrics.
+\section{Results}
+\subsection{Flow Fields}
+\includegraphics[width=0.8\textwidth]{figures/mach_contour.png}
+\subsection{Validation Metrics}
+MAE, RMSE, R$^2$, etc.
+\section{Performance Benchmarks}
+Parallel scaling, runtime, memory usage.
+\section{Conclusion}
+Summary and future work.
+\section{References}
+\begin{thebibliography}{9}
+\bibitem{CFDTextbook} J. D. Anderson, \emph{Computational Fluid Dynamics: The Basics with Applications}, McGraw-Hill, 1995.
+\bibitem{SST} F. R. Menter, "Two-Equation Eddy-Viscosity Turbulence Models for Engineering Applications," AIAA Journal, 32(8), 1994.
+\end{thebibliography}
+\end{document} 

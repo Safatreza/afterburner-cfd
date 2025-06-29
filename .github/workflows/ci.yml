@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI
 
 on:
   push:
@@ -7,24 +7,31 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  build-test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.10'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install -r src/validation/requirements.txt
-    - name: Run tests
-      run: |
-        python -m pytest
-    - name: Lint with flake8
-      run: |
-        pip install flake8
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics 
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install .
+      - name: Run unit tests
+        run: |
+          pytest src/
+      - name: Generate validation report
+        run: |
+          python src/cli.py --config test_data/validation_config.yaml --output test_results/validation_results.npz
+          python -m src.validation.validation_metrics
+      - name: Build docs
+        run: |
+          pip install sphinx sphinx_rtd_theme
+          cd docs && make html
+      - name: Deploy docs to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/_build/html 

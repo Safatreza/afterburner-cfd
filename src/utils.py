@@ -2,6 +2,8 @@ import csv
 from pathlib import Path
 from typing import Dict, Any
 import numpy as np
+import multiprocessing as mp
+from compressible_ns_solver import CompressibleNSSolver
 
 class SimulationConfig:
     def __init__(self, config: Dict[str, Any]):
@@ -90,3 +92,13 @@ class ResultsExporter:
                 writer.writerow([x])
         
         print(f"Shock locations exported to {shock_path}")
+
+def run_simulation(config):
+    solver = CompressibleNSSolver(config)
+    solver.run(n_steps=config.get('n_steps', 100))
+    return solver.get_results()
+
+def run_parameter_study_parallel(config_list, n_workers=4):
+    with mp.Pool(processes=n_workers) as pool:
+        results = pool.map(run_simulation, config_list)
+    return results

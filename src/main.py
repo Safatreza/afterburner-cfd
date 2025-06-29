@@ -7,6 +7,8 @@ from rayleigh_solver import RayleighFlowSolver
 from plots import FlowVisualizer
 from utils import SimulationConfig, ResultsExporter
 from gmsh_exporter import write_gmsh_2d
+from compressible_ns_solver import CompressibleNSSolver
+from ns_solver_config import config as ns_config
 
 class AfterburnerSimulation:
     def __init__(self, config: Dict[str, Any]):
@@ -84,6 +86,14 @@ def main():
     # Create and run simulation
     simulation = AfterburnerSimulation(config)
     simulation.run()
+
+    # Run new 2D compressible NS solver
+    solver = CompressibleNSSolver(ns_config)
+    solver.run(n_steps=100)  # Example: 100 steps
+    results = solver.get_results()
+    # Visualize results (optional)
+    visualizer = FlowVisualizer()
+    visualizer.plot_results(results)
 
 if __name__ == "__main__":
     main()

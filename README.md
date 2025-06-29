@@ -1,71 +1,129 @@
 # Supersonic Afterburner CFD Simulation
 
-This project simulates the flow dynamics in a **supersonic afterburner** using **Rayleigh flow** with spatial heat addition. The program implements a **quasi-1D CFD model** to solve compressible fluid flow equations, including a **Gaussian heat injection** model. It also provides visualizations of the flow properties (Mach number, pressure, temperature, etc.) and can detect shocks in the flow.
+A Python-based simulation tool for modeling compressible flow in a quasi-1D afterburner using Rayleigh flow with spatial heat addition. This project is designed for research and educational purposes, enabling the study of supersonic combustion, heat addition, and shock phenomena in afterburner configurations. The solver features a Gaussian heat injection model, robust shock detection, real-time visualization, and a comprehensive validation module for comparison with experimental and textbook data.
 
-## 🚀 Features
+---
 
-- **Supersonic inlet flow** (Mach 1.0–1.5)
-- **Heat injection model**: Gaussian spatial heat addition
-- **Rayleigh flow solver**: Solving compressible flow equations with heat addition
-- **Shock detection**: Detects sudden pressure drops or Mach number discontinuities
-- **Real-time animation**: Displays the evolution of the Mach number over time
-- **CLI parameter support**: Customize simulation parameters via command-line arguments
-- **CSV Export**: Save final simulation results to a CSV file for further analysis
-- **Visualization**: Plots the Mach number, pressure, temperature, density, and velocity profiles
+## Features
+- **Supersonic Inlet/Outlet Boundary Conditions**: Simulate realistic afterburner entry and exit conditions.
+- **Spatial Heat Addition**: Model heat release using a configurable Gaussian profile.
+- **Shock Detection**: Automatically identify and locate shocks in the flow field.
+- **Validation Module**: Compare simulation results with experimental and textbook cases using quantitative error metrics.
+- **Real-Time Visualization**: Generate static and animated plots of key flow variables (Mach number, pressure, temperature, density).
+- **Command-Line Interface (CLI)**: Run simulations and export results directly from the terminal.
+- **CSV Export**: Save simulation results for further analysis.
+- **Interactive Animation**: Visualize the evolution of flow properties along the afterburner.
 
-## 📊 Validation Module
+---
 
-The project includes a comprehensive validation module that compares CFD results against experimental data and textbook cases. This ensures the accuracy and reliability of the simulation results.
+## Validation Module
+The validation module ensures the accuracy and reliability of the simulation by:
+- **Experimental Comparison**: Validates against published experimental data (see `test_data/experimental_data.json`).
+- **Textbook Cases**: Benchmarks against classic Rayleigh flow and other analytical solutions.
+- **Error Metrics**:
+  - **MAE** (Mean Absolute Error)
+  - **RMSE** (Root Mean Square Error)
+  - **R²** (Coefficient of Determination)
+- **Automated Reporting**: Generates summary plots and text reports in `test_results/` for both experimental and textbook validations.
 
-### Features
-- **Experimental Data Validation**: Compare CFD results with experimental measurements
-  - Computes error metrics (MAE, RMSE, R², etc.)
-  - Generates comparison plots and error distributions
-  - Handles measurement uncertainties
-  - Produces detailed validation reports
+---
 
-- **Textbook Case Validation**: Validate against analytical solutions
-  - Laminar Poiseuille Flow
-  - Blasius Boundary Layer
-  - Customizable validation metrics
-  - Automatic report generation
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/afterburner-cfd.git
+   cd afterburner-cfd
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### Usage
+---
+
+## Usage
+### Command-Line Interface
+Run a simulation with a custom configuration:
+```bash
+python src/main.py --mach 2.0 --pressure 101325 --temperature 300 --heat_peak 1e6 --heat_width 0.1 --length 1.0 --points 1000 --export --output results.csv
+```
+
+### Python API Example
 ```python
-from src.validation.experimental_comparison import ExperimentalComparison
-from src.validation.textbook_cases import TextbookCaseManager
-
-# Validate against experimental data
-comparison = ExperimentalComparison('path/to/experimental_data.json')
-metrics = comparison.compare_with_cfd(cfd_data, save_dir='validation_results')
-
-# Validate against textbook cases
-manager = TextbookCaseManager()
-manager.add_case(LaminarPoiseuilleFlow(dp_dx=-1.0, mu=1.0, rho=1.0, h=1.0))
-results = manager.validate_all(cfd_data, x_coords, save_dir='validation_results')
+from src.rayleigh_solver import RayleighFlowSolver
+config = {
+    'mach': 2.0,
+    'pressure': 101325,
+    'temperature': 300,
+    'heat_peak': 1e6,
+    'heat_width': 0.1,
+    'length': 1.0,
+    'points': 1000
+}
+solver = RayleighFlowSolver(config)
+results = solver.solve()
 ```
 
-### Dependencies
-Additional dependencies for validation:
-- `pandas`
-- `seaborn`
-- `scikit-learn`
-
-Install validation-specific dependencies:
+### Validation
+Run the validation module:
 ```bash
-pip install -r src/validation/requirements.txt
+python src/validation/test_validation.py
 ```
 
-## 🛠️ Requirements
+---
 
-- **Python 3.10+**
-- **Dependencies**:
-  - `numpy`
-  - `scipy`
-  - `matplotlib`
-  - `tqdm`
-  
-Install the required libraries using the following command:
+## Visualization
+- **Static Plots**: Mach number, pressure, temperature, and density profiles along the afterburner.
+- **Shock Location**: Highlighted in plots and exported as a separate file.
+- **Animated Plots**: Real-time animation of flow evolution (requires Matplotlib).
+- **Validation Plots**: Error distributions, comparison with experimental/textbook data, and uncertainty bands.
 
-```bash
-pip install -r requirements.txt
+All plots and reports are saved in the `test_results/` directory.
+
+---
+
+## Project Structure
+```
+afterburner-cfd/
+├── src/
+│   ├── main.py                # CLI entry point
+│   ├── rayleigh_solver.py     # Core Rayleigh flow solver
+│   ├── plots.py               # Visualization utilities
+│   ├── utils.py               # Config, export, and helper functions
+│   └── validation/            # Validation and benchmarking modules
+│       ├── experimental_comparison.py
+│       ├── textbook_cases.py
+│       ├── validation_metrics.py
+│       ├── validation_plots.py
+│       └── test_validation.py
+├── test_data/                 # Experimental and reference data
+├── test_results/              # Output plots, reports, and CSVs
+├── requirements.txt           # Python dependencies
+├── README.md                  # Project documentation
+└── ...
+```
+
+---
+
+## Contributing
+Contributions are welcome! To contribute:
+1. Fork the repository and create a new branch.
+2. Make your changes with clear commit messages.
+3. Ensure all tests pass and add new tests as needed.
+4. Submit a pull request describing your changes.
+
+For major changes, please open an issue first to discuss your proposal.
+
+---
+
+## License
+[MIT License](LICENSE)  <!-- Replace with your actual license -->
+
+---
+
+## Acknowledgments
+- Experimental data and textbook references as cited in the code and documentation.
+- Inspired by classic CFD literature, including:
+  - J. D. Anderson, *Computational Fluid Dynamics: The Basics with Applications*, McGraw-Hill, 1995.
+  - F. R. Menter, "Two-Equation Eddy-Viscosity Turbulence Models for Engineering Applications," AIAA Journal, 32(8), 1994.
+- Thanks to all contributors and the open-source scientific Python community.

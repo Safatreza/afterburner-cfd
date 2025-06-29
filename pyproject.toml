@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "afterburner_cfd"
+version = "0.1.0"
+description = "2D Compressible Navier-Stokes CFD Solver with Modular Architecture"
+authors = [
+    {name = "Your Name", email = "your@email.com"}
+]
+requires-python = ">=3.8"
+dependencies = [
+    "numpy", "matplotlib", "pyyaml", "cerberus", "flask", "streamlit", "reportlab", "plotly"
+] 
