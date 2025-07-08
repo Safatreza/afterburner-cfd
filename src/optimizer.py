@@ -2,7 +2,11 @@ import numpy as np
 from scipy.optimize import minimize, differential_evolution
 from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import Matern
+<<<<<<< HEAD
 from typing import Dict, List, Any, Callable, Tuple
+=======
+from typing import Dict, List, Tuple
+>>>>>>> 5b8c4d6 (Final project update: code cleanup, visualization, docs, and tests)
 import json
 from pathlib import Path
 import logging

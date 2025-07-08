@@ -1,7 +1,11 @@
 import numpy as np
 import pandas as pd
 from scipy import stats
+<<<<<<< HEAD
 from typing import Dict, List, Tuple, Union
+=======
+from typing import Dict, Tuple
+>>>>>>> 5b8c4d6 (Final project update: code cleanup, visualization, docs, and tests)
 from dataclasses import dataclass
 import json
 import matplotlib.pyplot as plt

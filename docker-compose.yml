@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  afterburner-cfd:
+    build: .
+    volumes:
+      - .:/app
+    command: python src/main.py 

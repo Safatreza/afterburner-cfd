@@ -51,7 +51,11 @@ def test_experimental_validation():
     comparison = ExperimentalComparison('test_data/experimental_data.json')
     
     # Compare CFD results with experimental data
+<<<<<<< HEAD
     metrics = comparison.compare_with_cfd(
+=======
+    comparison.compare_with_cfd(
+>>>>>>> 5b8c4d6 (Final project update: code cleanup, visualization, docs, and tests)
         test_data['cfd_data'],
         save_dir='test_results/experimental'
     )

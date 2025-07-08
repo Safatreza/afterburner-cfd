@@ -1,5 +1,4 @@
 import numpy as np
-from pathlib import Path
 
 def get_mesh_parameters(height=1.0, ny=20):
     """

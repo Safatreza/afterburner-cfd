@@ -1,6 +1,10 @@
 import numpy as np
 from scipy.integrate import solve_ivp
+<<<<<<< HEAD
 from typing import Dict, Any, Tuple
+=======
+from typing import Dict
+>>>>>>> 5b8c4d6 (Final project update: code cleanup, visualization, docs, and tests)
 
 class RayleighFlowSolver:
     def __init__(self, config):

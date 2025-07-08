@@ -1,7 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
+<<<<<<< HEAD
 from typing import Dict, Any
 from matplotlib.animation import FuncAnimation
+=======
+from typing import Dict
+>>>>>>> 5b8c4d6 (Final project update: code cleanup, visualization, docs, and tests)
 
 class FlowVisualizer:
     def __init__(self):
@@ -90,6 +94,7 @@ class FlowVisualizer:
         self.axes[0, 1].set_ylim(0, 1.2 * np.max(results['pressure']))
         self.axes[1, 0].set_ylim(0, 1.2 * np.max(results['temperature']))
         self.axes[1, 1].set_ylim(0, 1.2 * np.max(results['density']))
+<<<<<<< HEAD
         
         # Create animation
         anim = FuncAnimation(
@@ -113,3 +118,5 @@ class FlowVisualizer:
         self.lines['density'].set_data(x, results['density'][:frame])
         
         return list(self.lines.values())
+=======
+>>>>>>> 5b8c4d6 (Final project update: code cleanup, visualization, docs, and tests)

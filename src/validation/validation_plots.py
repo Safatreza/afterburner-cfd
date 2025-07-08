@@ -2,8 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import stats
-from typing import Dict, List, Tuple, Union, Optional
-import pandas as pd
+from typing import Dict, List, Optional
 from .validation_metrics import ValidationMetrics
 
 class ValidationPlotter:

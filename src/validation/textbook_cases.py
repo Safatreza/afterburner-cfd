@@ -1,7 +1,12 @@
 import numpy as np
+<<<<<<< HEAD
 from typing import Dict, List, Tuple, Union, Optional, Callable
 from pathlib import Path
 import json
+=======
+from typing import Dict, Optional
+from pathlib import Path
+>>>>>>> 5b8c4d6 (Final project update: code cleanup, visualization, docs, and tests)
 from .validation_metrics import ValidationMetrics, ValidationAnalyzer
 from .validation_plots import ValidationPlotter
 
@@ -105,7 +110,10 @@ class BlasiusBoundaryLayer(TextbookCase):
         # Approximate solution for the Blasius equation
         f = 0.332 * eta
         f_prime = np.full_like(x_safe, 0.332)  # constant for all x
+<<<<<<< HEAD
         f_double_prime = 0.332 * np.exp(-eta**2/2)
+=======
+>>>>>>> 5b8c4d6 (Final project update: code cleanup, visualization, docs, and tests)
         u = self.u_inf * f_prime
         v = 0.5 * np.sqrt(self.nu * self.u_inf / x_safe) * (eta * f_prime - f)
         # For x <= 0, set u and v to 0

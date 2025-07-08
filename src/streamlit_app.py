@@ -2,7 +2,10 @@ import streamlit as st
 import numpy as np
 import plotly.graph_objs as go
 import matplotlib.pyplot as plt
+<<<<<<< HEAD
 import io
+=======
+>>>>>>> 5b8c4d6 (Final project update: code cleanup, visualization, docs, and tests)
 
 st.title('CFD Simulation Results Dashboard')
 

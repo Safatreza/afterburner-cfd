@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 import numpy as np
 
+=======
+>>>>>>> 5b8c4d6 (Final project update: code cleanup, visualization, docs, and tests)
 class PostProcessor:
     def __init__(self, mesh, fields):
         self.mesh = mesh
